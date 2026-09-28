@@ -1,0 +1,1048 @@
+/*
+|--------------------------------------------------------------------------
+| LostLink — My Reports Page Stylesheet
+|--------------------------------------------------------------------------
+| Page-specific styling for personal report management.
+| Matches LostLink design tokens, theme variables, and Browse Items grid.
+*/
+
+/* -------------------------------------------------------------------------
+   1. LAYOUT & CONTAINER
+   ------------------------------------------------------------------------- */
+.my-reports-page .app-main-content {
+  padding: var(--space-6) var(--space-8);
+}
+
+.my-reports-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-bottom: var(--space-6);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* -------------------------------------------------------------------------
+   2. PAGE HEADER
+   ------------------------------------------------------------------------- */
+.my-reports-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.my-reports-header-text {
+  min-width: 0;
+}
+
+.my-reports-title {
+  margin: 0 0 var(--space-1) 0;
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  color: var(--primary-text);
+  line-height: 1.2;
+}
+
+.my-reports-subtitle {
+  margin: 0;
+  font-size: var(--font-sm);
+  color: var(--secondary-text);
+  line-height: 1.5;
+}
+
+.my-reports-btn-new {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+}
+
+.my-reports-btn-new:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--elevation-2);
+}
+
+/* -------------------------------------------------------------------------
+   3. SUMMARY METRICS TILES
+   ------------------------------------------------------------------------- */
+.my-reports-summary {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+  margin-bottom: calc(
+    var(--space-2) * -1
+  ); /* Reduced gap to status filter row */
+}
+
+.summary-tile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-1);
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.summary-tile:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--elevation-2);
+  transform: translateY(-2px);
+}
+
+.summary-tile.is-active {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px var(--focus-ring);
+  background-color: var(--surface);
+}
+
+.summary-tile-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.summary-tile-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.summary-tile-data {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.summary-tile-count {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--primary-text);
+  line-height: 1.1;
+}
+
+.summary-tile-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--secondary-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   4. TOOLBAR: STATUS FILTERS & SORT
+   ------------------------------------------------------------------------- */
+.my-reports-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding-bottom: 2px;
+}
+
+.my-reports-status-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  overflow-x: auto;
+  max-width: 100%;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.my-reports-status-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.status-filter-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--secondary-text);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.status-filter-tab:hover {
+  border-color: var(--border-hover);
+  color: var(--primary-text);
+  background-color: var(--input-bg);
+}
+
+.status-filter-tab.is-selected {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.25);
+}
+
+.status-filter-tab .tab-count {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--input-bg);
+  color: var(--primary-text);
+  font-weight: 700;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.status-filter-tab.is-selected .tab-count {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.my-reports-sort-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.sort-label {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--secondary-text);
+}
+
+.sort-select-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sort-select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 32px 6px var(--space-3);
+  color: var(--primary-text);
+  font-size: var(--font-xs);
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.sort-select-wrapper select:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.sort-chevron {
+  position: absolute;
+  right: 10px;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  color: var(--secondary-text);
+}
+
+/* -------------------------------------------------------------------------
+   5. CONTEXTUAL STATE / SEARCH FEEDBACK BAR
+   ------------------------------------------------------------------------- */
+.my-reports-state-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  flex-wrap: wrap;
+}
+
+.state-bar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.state-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background-color: var(--input-bg);
+  color: var(--primary-text);
+  font-size: var(--font-xs);
+}
+
+.state-indicator svg {
+  width: 13px;
+  height: 13px;
+  color: var(--primary-blue);
+}
+
+.remove-chip-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--secondary-text);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1;
+  margin-left: 2px;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+[data-theme="dark"] .remove-chip-btn {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.remove-chip-btn:hover {
+  background-color: var(--danger);
+  color: #ffffff;
+}
+
+.state-results-count {
+  color: var(--secondary-text);
+  font-weight: 500;
+}
+
+.clear-all-filters-btn {
+  color: var(--primary-blue);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: var(--font-xs);
+}
+
+.clear-all-filters-btn:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------------------------
+   6. RESPONSIVE REPORTS GRID (Matches Browse Items)
+   ------------------------------------------------------------------------- */
+.my-reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  justify-content: start;
+  gap: var(--space-5);
+  width: 100%;
+}
+
+/* -------------------------------------------------------------------------
+   7. REPORT CARD STYLING (Matches Browse Items Card Philosophy)
+   ------------------------------------------------------------------------- */
+.my-report-card {
+  width: 100%;
+  max-width: 260px;
+  min-width: 0;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.my-report-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--elevation-2);
+  transform: translateY(-2px);
+}
+
+/* 4:3 Aspect Ratio Image Presentation */
+.card-image-wrapper {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--input-bg);
+}
+
+.card-image-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.card-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.my-report-card:hover .card-image-wrapper img {
+  transform: scale(1.03);
+}
+
+/* Lost / Found Badge */
+.report-type-badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: 4px 9px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: var(--elevation-1);
+  z-index: 2;
+  letter-spacing: 0.3px;
+}
+
+.report-type-badge.is-lost {
+  background-color: rgba(239, 68, 68, 0.94);
+  color: #ffffff;
+}
+
+.report-type-badge.is-found {
+  background-color: rgba(34, 197, 94, 0.94);
+  color: #ffffff;
+}
+
+/* Multi-photo Counter */
+.report-photo-count {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 7px;
+  border-radius: var(--radius-full);
+  background-color: rgba(15, 23, 42, 0.78);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.report-photo-count svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Card Body Content */
+.card-body-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-4);
+  min-height: 0;
+}
+
+/* Status Row */
+.card-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.my-report-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+}
+
+.my-report-status-badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Semantic Status Variants */
+.my-report-status-badge.status-pending {
+  background-color: rgba(245, 158, 11, 0.14);
+  color: #d97706;
+}
+[data-theme="dark"] .my-report-status-badge.status-pending {
+  background-color: rgba(251, 191, 36, 0.16);
+  color: #fbbf24;
+}
+
+.my-report-status-badge.status-active {
+  background-color: rgba(37, 99, 235, 0.12);
+  color: var(--primary-blue);
+}
+[data-theme="dark"] .my-report-status-badge.status-active {
+  background-color: rgba(59, 130, 246, 0.16);
+  color: #60a5fa;
+}
+
+.my-report-status-badge.status-claimed {
+  background-color: rgba(139, 92, 246, 0.14);
+  color: var(--accent);
+}
+[data-theme="dark"] .my-report-status-badge.status-claimed {
+  background-color: rgba(167, 139, 250, 0.16);
+  color: #a78bfa;
+}
+
+.my-report-status-badge.status-returned {
+  background-color: rgba(34, 197, 94, 0.14);
+  color: var(--success);
+}
+[data-theme="dark"] .my-report-status-badge.status-returned {
+  background-color: rgba(74, 222, 128, 0.16);
+  color: #4ade80;
+}
+
+.my-report-status-badge.status-closed {
+  background-color: var(--input-bg);
+  color: var(--secondary-text);
+}
+
+.card-item-code {
+  font-size: 11px;
+  color: var(--disabled-text);
+  font-family: monospace;
+  font-weight: 500;
+}
+
+/* Item Title */
+.card-item-title {
+  margin: 0;
+  font-size: var(--font-md);
+  font-weight: 700;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.7em;
+}
+
+.card-item-title a {
+  color: var(--primary-text);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.card-item-title a:hover {
+  color: var(--primary-blue);
+}
+
+/* Category */
+.card-item-category {
+  margin: var(--space-1) 0 var(--space-2);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--primary-blue);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Meta lines (Location & Date) */
+.card-meta-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.card-meta-line svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--secondary-text);
+}
+
+.card-meta-line span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.card-location {
+  min-height: 1.4em;
+}
+
+.card-date time {
+  font-weight: 500;
+}
+
+/* Claim Indicator */
+.card-claim-indicator {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--border);
+}
+
+.claim-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.claim-badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+.claim-badge.claim-pending {
+  color: #d97706;
+}
+[data-theme="dark"] .claim-badge.claim-pending {
+  color: #fbbf24;
+}
+
+.claim-badge.claim-approved {
+  color: var(--success);
+}
+
+.claim-badge.claim-reviewed {
+  color: var(--primary-blue);
+}
+
+.claim-badge.claim-none {
+  color: var(--disabled-text);
+}
+
+/* Card Action Button */
+.card-footer-action {
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.card-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 8px var(--space-3);
+  border-radius: var(--radius-md);
+  background-color: var(--input-bg);
+  border: 1px solid var(--border);
+  color: var(--primary-text);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.card-action-btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition-fast);
+}
+
+.card-action-btn:hover {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+.card-action-btn:hover svg {
+  transform: translateX(2px);
+}
+
+/* -------------------------------------------------------------------------
+   8. EMPTY STATES
+   ------------------------------------------------------------------------- */
+.my-reports-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-10) var(--space-6);
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  min-height: 340px;
+}
+
+.empty-state-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background-color: var(--input-bg);
+  color: var(--primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.empty-state-icon-wrap svg {
+  width: 26px;
+  height: 26px;
+}
+
+.my-reports-empty-state h3 {
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--primary-text);
+}
+
+.my-reports-empty-state p {
+  margin: 0 0 var(--space-6) 0;
+  font-size: var(--font-sm);
+  color: var(--secondary-text);
+  max-width: 440px;
+  line-height: 1.5;
+}
+
+.empty-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.empty-state-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.empty-text-link {
+  color: var(--primary-blue);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.empty-text-link:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------------------------
+   9. PAGINATION
+   ------------------------------------------------------------------------- */
+.my-reports-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.pagination-btn,
+.pagination-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  color: var(--primary-text);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.pagination-btn:hover,
+.pagination-number:hover {
+  border-color: var(--border-hover);
+  background-color: var(--input-bg);
+}
+
+.pagination-number.is-current {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.pagination-numbers {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.pagination-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 38px;
+  color: var(--disabled-text);
+  font-size: var(--font-sm);
+}
+
+/* -------------------------------------------------------------------------
+   10. NAVBAR SEARCH CONTEXTUAL INTERFACE STYLING
+   ------------------------------------------------------------------------- */
+.navbar-search-container {
+  position: relative;
+}
+
+.navbar-search-container .search-icon {
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.navbar-search-container .search-icon:hover {
+  color: var(--primary-blue);
+}
+
+.navbar-search-clear-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--disabled-text);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.navbar-search-clear-btn:hover {
+  color: var(--primary-text);
+  background-color: var(--input-bg);
+}
+
+.navbar-search-clear-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* -------------------------------------------------------------------------
+   11. RESPONSIVE DESIGN & REFINEMENTS
+   ------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .my-reports-summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 1024px) {
+  .my-reports-page .app-main-content {
+    padding: var(--space-5) var(--space-6);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile / Tablet vertical breathing room from navbar */
+  .my-reports-page .app-main-content {
+    padding: var(--space-4) var(--space-4) var(--space-8);
+  }
+
+  .my-reports-wrapper {
+    padding-bottom: var(--space-6);
+  }
+
+  .my-reports-title {
+    font-size: var(--font-xl);
+  }
+
+  .my-reports-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .my-reports-sort-control {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 640px) {
+  .my-reports-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+}
+
+/* Mobile: Two cards per row where space permits, comfortable top and bottom padding */
+@media (max-width: 576px) {
+  .my-reports-page .app-main-content {
+    padding: var(--space-4) var(--space-3) var(--space-10);
+  }
+
+  .my-reports-wrapper {
+    gap: var(--space-4);
+    padding-bottom: var(--space-8);
+  }
+
+  .my-reports-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+    margin-bottom: var(--space-1);
+  }
+
+  .my-reports-btn-new {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Two cards per row matching Browse Items */
+  .my-reports-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .my-report-card {
+    width: 100%;
+    max-width: 220px;
+    justify-self: center;
+  }
+
+  .card-body-content {
+    padding: var(--space-3);
+  }
+
+  .card-item-title {
+    font-size: var(--font-sm);
+    min-height: 2.6em;
+  }
+
+  .card-item-code {
+    display: none; /* Hide internal code on small mobile to give room to status */
+  }
+
+  .my-report-status-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .card-meta-line {
+    font-size: 11px;
+    gap: 4px;
+  }
+
+  .claim-badge {
+    font-size: 10px;
+  }
+
+  .card-action-btn {
+    padding: 6px var(--space-2);
+    font-size: 11px;
+  }
+
+  .report-type-badge {
+    top: var(--space-2);
+    left: var(--space-2);
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+
+  .report-photo-count {
+    right: var(--space-2);
+    bottom: var(--space-2);
+    padding: 3px 5px;
+    font-size: 10px;
+  }
+
+  .pagination-btn span {
+    display: none;
+  }
+
+  .pagination-btn,
+  .pagination-number {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+}
+
+/* Very Narrow Mobile (<= 340px) */
+@media (max-width: 340px) {
+  .my-reports-page .app-main-content {
+    padding: var(--space-4) var(--space-2) var(--space-8);
+  }
+
+  .my-reports-grid {
+    gap: var(--space-2);
+  }
+
+  .card-body-content {
+    padding: 8px;
+  }
+
+  .card-item-title {
+    font-size: 12px;
+  }
+}

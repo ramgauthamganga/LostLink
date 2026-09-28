@@ -1,0 +1,1258 @@
+/**
+ * ==============================================================================
+ * LOSTLINK ANNOUNCEMENTS SYSTEM STYLES (announcements.css)
+ * ==============================================================================
+ * Dedicated styles for the Announcements page.
+ * Reuses existing global tokens from theme.css and components.css.
+ * Supports both Light Mode and Dark Mode.
+ */
+
+/* Main Page Wrapper */
+.anc-page-main {
+  padding: var(--space-6) var(--space-8);
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.anc-layout-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Header Area */
+.anc-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.anc-header-text {
+  flex: 1;
+  min-width: 260px;
+}
+
+.anc-page-title {
+  font-size: var(--font-3xl);
+  font-weight: 700;
+  color: var(--primary-text);
+  margin: 0 0 var(--space-1) 0;
+  letter-spacing: -0.02em;
+}
+
+.anc-page-subtitle {
+  font-size: var(--font-sm);
+  color: var(--secondary-text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Admin Header Controls & Tabs */
+.anc-admin-header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.anc-admin-tabs {
+  display: inline-flex;
+  background-color: var(--input-bg);
+  padding: 3px;
+  border-radius: var(--radius-md);
+  gap: 3px;
+}
+
+.anc-tab-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--secondary-text);
+  text-decoration: none;
+  border-radius: calc(var(--radius-md) - 2px);
+  transition: all var(--transition-fast);
+}
+
+.anc-tab-link:hover {
+  color: var(--primary-text);
+}
+
+.anc-tab-link.active {
+  background-color: var(--surface);
+  color: var(--primary-text);
+  box-shadow: var(--elevation-1);
+}
+
+.anc-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--border);
+  color: var(--secondary-text);
+  line-height: 1.2;
+}
+
+.anc-tab-badge-warning {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+.anc-tab-badge-info {
+  background-color: rgba(37, 99, 235, 0.15);
+  color: var(--brand-blue);
+}
+
+/* Alert Message Banner Container (Empty by default, ZERO space when empty) */
+.anc-alert-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.anc-alert-container:empty {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+}
+
+.anc-alert-banner {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--brand-blue);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  animation: fadeIn var(--transition-fast);
+}
+
+.anc-alert-banner[hidden],
+.anc-alert-banner:empty {
+  display: none !important;
+}
+
+.anc-alert-banner.is-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.anc-alert-banner.is-success {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+.anc-alert-close {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  color: currentColor;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+/* ==========================================================================
+   SPACIOUS VERTICAL LIST (Public View)
+   ========================================================================== */
+.anc-vertical-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.anc-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 26px;
+  box-shadow: var(--elevation-1);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.anc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
+  border-color: var(--border-hover);
+}
+
+/* Subtle border indicator for pinned notices */
+.anc-card.is-pinned {
+  border-left: 4px solid var(--brand-blue);
+}
+
+.anc-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.anc-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Pin Badge */
+.anc-pin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background-color: rgba(37, 99, 235, 0.12);
+  color: var(--brand-blue);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+.anc-pin-icon {
+  font-size: 11px;
+}
+
+/* Category Badge */
+.anc-cat-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: var(--input-bg);
+  color: var(--secondary-text);
+  border: 1px solid var(--border);
+}
+
+.anc-cat-badge.anc-cat-college {
+  background-color: rgba(59, 130, 246, 0.08);
+  color: #2563eb;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.anc-cat-badge.anc-cat-lostlink {
+  background-color: rgba(139, 92, 246, 0.08);
+  color: #7c3aed;
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.anc-cat-badge.anc-cat-event {
+  background-color: rgba(16, 185, 129, 0.08);
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.anc-cat-badge.anc-cat-important {
+  background-color: rgba(245, 158, 11, 0.08);
+  color: #d97706;
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.anc-cat-badge.anc-cat-system {
+  background-color: var(--input-bg);
+  color: var(--secondary-text);
+}
+
+/* Priority Badge */
+.anc-prio-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.anc-prio-badge.anc-prio-normal {
+  background-color: var(--input-bg);
+  color: var(--secondary-text);
+}
+
+.anc-prio-badge.anc-prio-high {
+  background-color: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.anc-prio-badge.anc-prio-urgent {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* Date text */
+.anc-card-date,
+.anc-date-text {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+}
+
+/* Card Admin Action Buttons */
+.anc-card-admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.anc-icon-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--secondary-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.anc-icon-btn:hover {
+  background-color: var(--card-hover);
+  color: var(--primary-text);
+  border-color: var(--border);
+}
+
+.anc-icon-btn.active-pin {
+  color: var(--brand-blue);
+}
+
+/* Title & Preview */
+.anc-card-title {
+  margin: 0;
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--primary-text);
+  line-height: 1.35;
+}
+
+.anc-card-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.anc-card-title a:hover {
+  color: var(--brand-blue);
+}
+
+.anc-card-preview {
+  margin: 0;
+  font-size: var(--font-sm);
+  color: var(--secondary-text);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Footer / Read More */
+.anc-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 4px;
+}
+
+.anc-read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--brand-blue);
+  text-decoration: none;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.anc-read-more-btn:hover {
+  gap: 9px;
+  color: var(--brand-blue-hover);
+}
+
+/* ==========================================================================
+   DETAIL VIEW
+   ========================================================================== */
+.anc-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.anc-detail-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.anc-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--brand-blue);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.anc-back-link:hover {
+  text-decoration: underline;
+}
+
+.anc-detail-admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.anc-detail-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--elevation-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.anc-detail-card.has-pin {
+  border-left: 4px solid var(--brand-blue);
+}
+
+.anc-detail-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.anc-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.anc-detail-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-text);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.anc-detail-meta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  flex-wrap: wrap;
+}
+
+.anc-author-info,
+.anc-exact-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.anc-detail-body {
+  font-size: var(--font-md);
+  color: var(--primary-text);
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.anc-detail-card-footer {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+}
+
+/* Status Pill */
+.anc-status-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--input-bg);
+  color: var(--secondary-text);
+}
+
+.anc-status-pill.anc-status-published {
+  background-color: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+}
+
+.anc-status-pill.anc-status-draft {
+  background-color: rgba(100, 116, 139, 0.15);
+  color: #64748b;
+}
+
+.anc-status-pill.anc-status-scheduled {
+  background-color: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+}
+
+.anc-status-pill.anc-status-archived {
+  background-color: rgba(100, 116, 139, 0.2);
+  color: #475569;
+}
+
+.anc-status-pill.anc-status-expired {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+
+/* ==========================================================================
+   CARD ADMIN ACTIONS & BUTTONS
+   ========================================================================== */
+.anc-card-admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-xs {
+  padding: 5px 10px;
+  font-size: 11.5px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.2;
+  transition: all var(--transition-fast);
+}
+
+.btn-xs svg {
+  flex-shrink: 0;
+}
+
+.btn-toggle-pin.is-active-pinned {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--brand-blue);
+  border-color: rgba(37, 99, 235, 0.35);
+  font-weight: 600;
+}
+
+.text-danger {
+  color: var(--danger) !important;
+}
+
+.btn.text-danger:hover {
+  background-color: rgba(239, 68, 68, 0.08) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+/* ==========================================================================
+   MODAL DIALOG STYLES
+   ========================================================================== */
+/* ==========================================================================
+   MODAL DIALOG STYLES (Polished & Visually Consistent with LostLink)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.modal-overlay[hidden] {
+  display: none !important;
+}
+
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.22), 0 0 0 1px var(--border);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: modalScaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-block-dialog {
+  max-width: 460px;
+}
+
+/* Modal Header */
+.modal-dialog-header {
+  padding: 20px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.anc-modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.anc-modal-header-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary-blue);
+  flex-shrink: 0;
+}
+
+.anc-icon-danger {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: var(--danger) !important;
+}
+
+.anc-modal-header-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.modal-dialog-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-text);
+  line-height: 1.3;
+}
+
+.modal-dialog-subtitle {
+  margin: 3px 0 0 0;
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  line-height: 1.4;
+}
+
+.modal-dialog-close {
+  background: transparent;
+  border: none;
+  width: 34px;
+  height: 34px;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--secondary-text);
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.modal-dialog-close:hover {
+  background: var(--input-bg);
+  color: var(--primary-text);
+}
+
+/* Modal Body & Form Layout */
+.modal-dialog-body {
+  padding: 24px 26px;
+}
+
+.modal-dialog-subtext {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.anc-modal-dialog {
+  width: 660px;
+  max-width: calc(100% - 32px);
+  max-height: min(88vh, 780px);
+  display: flex;
+  flex-direction: column;
+}
+
+#anc-announcement-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+.anc-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 24px 26px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-hover, #cbd5e1) transparent;
+}
+
+/* Thin Elegant Scrollbar for Modal Body */
+.anc-form-body::-webkit-scrollbar {
+  width: 6px;
+}
+.anc-form-body::-webkit-scrollbar-thumb {
+  background-color: var(--border-hover, #cbd5e1);
+  border-radius: 999px;
+}
+.anc-form-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Form Groups & Labels */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-text);
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  letter-spacing: -0.01em;
+}
+
+.anc-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.anc-label-row label {
+  margin-bottom: 0;
+}
+
+.char-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--secondary-text);
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.required {
+  color: var(--danger);
+  margin-left: 3px;
+  font-weight: 700;
+}
+
+/* Form Controls (Inputs, Selects, Textareas) */
+.form-control {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  color: var(--primary-text);
+  padding: 10px 14px;
+  height: 42px;
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.form-control:hover {
+  border-color: var(--border-hover);
+}
+
+.form-control:focus {
+  border-color: var(--primary-blue);
+  background-color: var(--surface);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+}
+
+.form-control::placeholder {
+  color: var(--secondary-text);
+  opacity: 0.75;
+}
+
+.anc-textarea {
+  min-height: 125px;
+  height: auto;
+  padding: 12px 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+/* Custom Select Dropdown Styling */
+.anc-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.anc-select-wrapper select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.anc-select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 6px;
+  background-color: var(--secondary-text);
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  pointer-events: none;
+  transition: transform var(--transition-fast);
+}
+
+/* Two-Column Form Row */
+.anc-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Pin to Top Checkbox Card */
+.anc-checkbox-card {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  transition: all var(--transition-fast);
+}
+
+.anc-checkbox-card:hover {
+  border-color: var(--border-hover);
+  background-color: var(--card-hover, var(--input-bg));
+}
+
+.anc-checkbox-card:has(.anc-checkbox-input:checked) {
+  background: rgba(37, 99, 235, 0.05);
+  border-color: var(--primary-blue);
+}
+
+.anc-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  margin: 0;
+  user-select: none;
+}
+
+.anc-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.anc-checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1.5px solid var(--border-hover);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: all var(--transition-fast);
+  color: #ffffff;
+}
+
+.anc-checkbox-custom svg {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all var(--transition-fast);
+}
+
+.anc-checkbox-input:checked + .anc-checkbox-custom {
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+.anc-checkbox-input:checked + .anc-checkbox-custom svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.anc-checkbox-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.anc-checkbox-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.anc-checkbox-hint {
+  font-size: 12px;
+  color: var(--secondary-text);
+  line-height: 1.4;
+}
+
+/* Publication Status 3-Card Segmented Grid */
+.anc-section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.anc-status-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.anc-status-card {
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+  user-select: none;
+}
+
+.anc-status-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.anc-status-card-box {
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all var(--transition-fast);
+}
+
+.anc-status-card:hover .anc-status-card-box {
+  border-color: var(--border-hover);
+  background: var(--card-hover, var(--input-bg));
+}
+
+.anc-status-card:has(.anc-status-radio:checked) .anc-status-card-box {
+  background: var(--surface);
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 1px var(--primary-blue), 0 2px 8px rgba(37, 99, 235, 0.12);
+}
+
+.anc-status-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.anc-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.anc-dot-published { background: var(--success, #22c55e); }
+.anc-dot-draft { background: var(--warning, #f59e0b); }
+.anc-dot-scheduled { background: var(--info, #3b82f6); }
+
+.anc-status-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.anc-status-card-desc {
+  font-size: 11px;
+  color: var(--secondary-text);
+  line-height: 1.35;
+}
+
+/* Schedule Card */
+.anc-schedule-card {
+  background: rgba(37, 99, 235, 0.04);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  animation: fadeIn var(--transition-fast);
+}
+
+.anc-schedule-card[hidden] {
+  display: none !important;
+}
+
+.helper-text {
+  display: block;
+  font-size: 12px;
+  color: var(--secondary-text);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* Modal Footer */
+.modal-dialog-footer {
+  padding: 18px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  background-color: var(--surface);
+  flex-shrink: 0;
+}
+
+.modal-dialog-footer .btn {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS & MOBILE COMFORTABLE BOTTOM BREATHING SPACE
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Comfortably spaced bottom breathing area on mobile so nothing is cut off */
+  .anc-page-main {
+    padding: var(--space-4) var(--space-4) calc(var(--space-16, 64px) + env(safe-area-inset-bottom, 36px)) var(--space-4);
+  }
+
+  .anc-layout-container {
+    padding-bottom: 48px;
+  }
+
+  .anc-card-list {
+    margin-bottom: 36px;
+  }
+
+  .anc-card {
+    padding: 16px 18px;
+  }
+
+  .anc-detail-card {
+    padding: 20px;
+    margin-bottom: 48px;
+  }
+
+  .anc-detail-title {
+    font-size: 22px;
+  }
+
+  .anc-page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .anc-admin-header-controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: var(--space-3);
+  }
+
+  .anc-admin-tabs {
+    overflow-x: auto;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .anc-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .anc-card-admin-actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+    padding-top: 4px;
+    border-top: 1px dashed var(--border);
+  }
+
+  /* Modal Mobile Adaptations: Top Clearance for Browser Navigation Bar & Bottom Edge Protection */
+  .modal-overlay {
+    padding-top: max(32px, calc(env(safe-area-inset-top, 0px) + 32px));
+    padding-bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 24px));
+    padding-left: 14px;
+    padding-right: 14px;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal-content.anc-modal-dialog,
+  .modal-content.anc-delete-dialog {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100vh - 96px - env(safe-area-inset-top, 24px) - env(safe-area-inset-bottom, 24px));
+    max-height: calc(100dvh - 96px - env(safe-area-inset-top, 24px) - env(safe-area-inset-bottom, 24px));
+    border-radius: var(--radius-xl);
+    margin-top: auto;
+    margin-bottom: calc(8px + env(safe-area-inset-bottom, 8px));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .modal-dialog-header {
+    padding: 14px 16px;
+    flex-shrink: 0;
+  }
+
+  .anc-modal-header-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .anc-modal-header-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .modal-dialog-title {
+    font-size: 16px;
+  }
+
+  .modal-dialog-subtitle {
+    font-size: 11.5px;
+  }
+
+  #anc-announcement-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .anc-form-body {
+    padding: 18px 18px 24px 18px;
+    gap: 16px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .anc-form-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .anc-status-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .modal-dialog-footer {
+    padding: 14px 18px calc(20px + env(safe-area-inset-bottom, 14px)) 18px;
+    flex-shrink: 0;
+  }
+
+  .modal-dialog-footer .btn {
+    flex: 1;
+  }
+}

@@ -1,0 +1,1147 @@
+/*
+|--------------------------------------------------------------------------
+| LOSTLINK SETTINGS STYLESHEET (settings.css)
+|--------------------------------------------------------------------------
+| Scoped styles for the continuous scroll-spy Settings page.
+| Uses existing design tokens and variables from theme.css and components.css.
+| Does NOT modify or override global styles outside .settings-page.
+|
+*/
+
+/* 
+|--------------------------------------------------------------------------
+| 1. PAGE LAYOUT & SPACING ("COMFORTABLE GAP")
+|--------------------------------------------------------------------------
+*/
+.settings-content-wrapper {
+  max-width: 920px;
+  margin: 0 auto;
+  padding-bottom: var(--space-12);
+  min-width: 0;
+}
+
+/* Desktop compact spacing: significantly reduces the excessive gap between navbar and settings tab navigation */
+@media (min-width: 769px) {
+  .settings-page .app-main-content {
+    padding-top: var(--space-4);
+  }
+}
+
+.settings-header {
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+}
+
+.settings-title {
+  font-size: var(--font-3xl);
+  font-weight: 700;
+  color: var(--primary-text);
+  margin: 0 0 var(--space-1) 0;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.settings-subtitle {
+  font-size: var(--font-md);
+  color: var(--secondary-text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 2. STICKY SCROLL-SPY NAVIGATION (PILL STYLE)
+|--------------------------------------------------------------------------
+*/
+.settings-tabs-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg);
+  padding: var(--space-1) 0;
+  margin-bottom: var(--space-6);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.settings-tabs-wrapper.is-sticky {
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--elevation-1);
+}
+
+.settings-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  width: 100%;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--elevation-1);
+}
+
+.settings-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--secondary-text);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.settings-tab-btn:hover {
+  color: var(--primary-text);
+  background-color: var(--card-hover);
+}
+
+.settings-tab-btn:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+.settings-tab-btn.active {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  box-shadow: var(--elevation-1);
+}
+
+.settings-tab-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 3. CONTINUOUS VERTICAL SECTIONS
+|--------------------------------------------------------------------------
+*/
+.settings-section {
+  scroll-margin-top: 84px; /* Clearance so headings never hide behind sticky navigation */
+  margin-bottom: var(--space-8);
+}
+
+.settings-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-1);
+  padding: var(--space-6);
+  margin-bottom: 0;
+}
+
+.settings-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.settings-card-header-left {
+  flex: 1;
+  min-width: 240px;
+}
+
+.settings-card-header-left h2 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--primary-text);
+  margin: 0 0 var(--space-1) 0;
+}
+
+.settings-card-header-left p {
+  font-size: var(--font-sm);
+  color: var(--secondary-text);
+  margin: 0;
+}
+
+.settings-card-header-action {
+  flex-shrink: 0;
+}
+
+/* Secondary / Outline Button Style using existing tokens */
+.btn-outline {
+  background-color: transparent;
+  color: var(--primary-text);
+  border: 1px solid var(--border);
+  box-shadow: var(--elevation-1);
+}
+
+.btn-outline:hover {
+  background-color: var(--card-hover);
+  border-color: var(--border-hover);
+  color: var(--primary-blue);
+}
+
+.btn-secondary {
+  background-color: var(--card-hover);
+  color: var(--primary-text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border);
+}
+
+.btn-sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-xs);
+  border-radius: var(--radius-sm);
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 4. ALERTS & NOTICES
+|--------------------------------------------------------------------------
+*/
+.settings-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-6);
+  font-size: var(--font-sm);
+  line-height: 1.5;
+  box-shadow: var(--elevation-1);
+  animation: fadeIn var(--transition-normal);
+}
+
+.settings-alert-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.settings-alert-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.settings-alert-success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.settings-alert-success .settings-alert-icon {
+  color: #059669;
+}
+
+.settings-alert-error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.settings-alert-error .settings-alert-icon {
+  color: #dc2626;
+}
+
+[data-theme="dark"] .settings-alert-success {
+  background-color: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+[data-theme="dark"] .settings-alert-success .settings-alert-icon {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .settings-alert-error {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+[data-theme="dark"] .settings-alert-error .settings-alert-icon {
+  color: #f87171;
+}
+
+.settings-alert-close {
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-alert-close:hover {
+  opacity: 1;
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 5. ACCOUNT SECTION (READ-ONLY & EDITABLE AVATAR)
+|--------------------------------------------------------------------------
+*/
+.settings-profile-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--card-hover);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-5);
+  border: 1px solid var(--border);
+}
+
+/* Avatar container with subtle edit affordance */
+.settings-avatar-container {
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.settings-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 2px solid var(--border);
+  background-color: var(--surface);
+  display: block;
+  transition: opacity var(--transition-fast);
+}
+
+.settings-avatar-container:hover .settings-avatar {
+  opacity: 0.85;
+}
+
+.settings-avatar-edit-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  border: 2px solid var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--elevation-1);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.settings-avatar-container:hover .settings-avatar-edit-badge {
+  background-color: var(--primary-hover);
+  transform: scale(1.1);
+}
+
+.settings-avatar-actions {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  animation: fadeIn var(--transition-fast);
+}
+
+.settings-user-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.settings-user-name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-1);
+}
+
+.settings-user-name {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--primary-text);
+  margin: 0;
+}
+
+.settings-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.settings-pill-role-student {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--primary-blue);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.settings-pill-role-admin {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.settings-user-code-text {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  font-family: monospace;
+}
+
+/* Read-Only Profile Presentation (NO disabled input boxes) */
+.settings-profile-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.settings-profile-detail-item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--card-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.settings-profile-detail-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.detail-label {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.detail-value {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--primary-text);
+  word-break: break-word;
+}
+
+/* Edit Mode Form Container */
+.account-edit-mode {
+  animation: fadeIn var(--transition-fast);
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 6. FORM CONTROLS & INPUTS
+|--------------------------------------------------------------------------
+*/
+.settings-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.settings-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.settings-form-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--primary-text);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.settings-input,
+.settings-select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--surface);
+  color: var(--primary-text);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.settings-input:focus,
+.settings-select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.settings-input:disabled,
+.settings-input[readonly] {
+  background-color: var(--card-hover);
+  color: var(--secondary-text);
+  cursor: not-allowed;
+  border-color: var(--border);
+}
+
+.settings-input-help {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  margin-top: var(--space-1);
+}
+
+.settings-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+/* Password input with toggle button */
+.settings-input-password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.settings-input-password-wrapper .settings-input {
+  padding-right: 42px;
+}
+
+.settings-pw-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--secondary-text);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.settings-pw-toggle-btn:hover {
+  color: var(--primary-text);
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 7. SECURITY SECTION (OVERVIEW & CHANGE PASSWORD)
+|--------------------------------------------------------------------------
+*/
+.settings-security-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.settings-security-item {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--card-hover);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.settings-security-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.settings-security-label {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.settings-security-value {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+.security-edit-mode {
+  animation: fadeIn var(--transition-fast);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 8. NOTIFICATIONS & PRIVACY TOGGLE CONTROLS
+|--------------------------------------------------------------------------
+*/
+.settings-toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.settings-toggle-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--card-hover);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  transition: border-color var(--transition-fast);
+}
+
+.settings-toggle-info {
+  flex: 1;
+}
+
+.settings-toggle-title {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--primary-text);
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.settings-toggle-desc {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.settings-badge-active {
+  display: inline-flex;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 600;
+  background-color: rgba(34, 197, 94, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+/* Switch UI */
+.settings-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.settings-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.settings-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--border-hover);
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-full);
+}
+
+.settings-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-full);
+  box-shadow: var(--elevation-1);
+}
+
+.settings-switch input:checked + .settings-slider {
+  background-color: var(--primary-blue);
+}
+
+.settings-switch input:focus-visible + .settings-slider {
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.settings-switch input:checked + .settings-slider:before {
+  transform: translateX(20px);
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 9. APPEARANCE THEME SELECTOR
+|--------------------------------------------------------------------------
+*/
+.settings-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.settings-theme-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-5) var(--space-4);
+  background-color: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.settings-theme-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-2);
+}
+
+.settings-theme-card.active {
+  border-color: var(--primary-blue);
+  background-color: rgba(37, 99, 235, 0.04);
+}
+
+[data-theme="dark"] .settings-theme-card.active {
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.settings-theme-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-hover);
+  color: var(--primary-blue);
+  margin-bottom: var(--space-3);
+  transition: all var(--transition-fast);
+}
+
+.settings-theme-card.active .settings-theme-icon-box {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+.settings-theme-title {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--primary-text);
+  margin: 0 0 var(--space-1) 0;
+}
+
+.settings-theme-desc {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.settings-theme-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-theme-card.active .settings-theme-check {
+  display: flex;
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 10. ABOUT TAB SPECIFICS
+|--------------------------------------------------------------------------
+*/
+.settings-about-hero {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--card-hover);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-6);
+  border: 1px solid var(--border);
+}
+
+.settings-about-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.settings-about-meta h3 {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--primary-text);
+  margin: 0 0 2px 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.settings-about-version-badge {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--primary-blue);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.settings-about-desc {
+  font-size: var(--font-sm);
+  color: var(--secondary-text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.settings-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.settings-info-item {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.settings-info-label {
+  font-size: var(--font-xs);
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.settings-info-value {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+/* 
+|--------------------------------------------------------------------------
+| 11. RESPONSIVE BREAKPOINTS (MOBILE & TABLET)
+|--------------------------------------------------------------------------
+*/
+@media (max-width: 1024px) {
+  .settings-content-wrapper {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Release body clipping on mobile so page flows and scrolls naturally */
+  html,
+  body.settings-page {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Release shell container height so content flows naturally without dark cutoff */
+  .settings-page .app-container {
+    height: auto !important;
+    min-height: calc(100vh - 64px) !important;
+    min-height: calc(100dvh - 64px) !important;
+    overflow: visible !important;
+    margin-top: 0 !important;
+  }
+
+  /* Release inner scroll container so document handles scrolling */
+  .settings-page .app-main-content {
+    height: auto !important;
+    overflow: visible !important;
+    padding: var(--space-4);
+    padding-top: calc(var(--space-6) + 4px); /* Comfortable breathing gap under 64px navbar */
+    padding-bottom: var(--space-12);
+  }
+
+  /* Ensure content wrapper doesn't trap sticky position */
+  .settings-page .settings-content-wrapper {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Settings section navigation: must be the sticky scrolling element on mobile */
+  .settings-page .settings-tabs-wrapper {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 64px !important;
+    z-index: 999 !important;
+    background-color: var(--bg) !important;
+    padding: var(--space-2) 0 !important;
+    margin-bottom: var(--space-5) !important;
+    width: 100%;
+  }
+
+  .settings-header {
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .settings-title {
+    font-size: var(--font-2xl);
+  }
+
+  .settings-subtitle {
+    font-size: var(--font-sm);
+  }
+
+  .settings-section {
+    scroll-margin-top: 130px; /* 64px navbar + ~56px sticky tabs + 10px breathing clearance */
+    margin-bottom: var(--space-6);
+  }
+
+  /* Mobile settings navigation: true pill / capsule silhouette matching desktop */
+  .settings-tabs {
+    display: flex;
+    grid-template-columns: none;
+    align-items: center;
+    gap: var(--space-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    border-radius: var(--radius-full) !important;
+    padding: 4px 6px;
+    width: 100%;
+  }
+
+  .settings-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .settings-tab-btn {
+    width: auto;
+    flex-shrink: 0;
+    justify-content: flex-start;
+  }
+
+  .settings-tab-btn:first-child {
+    margin-left: 2px;
+  }
+
+  .settings-tab-btn:last-child {
+    margin-right: 2px;
+  }
+
+  .settings-theme-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .settings-theme-card {
+    flex-direction: row;
+    text-align: left;
+    gap: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .settings-theme-icon-box {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .settings-security-grid,
+  .settings-info-grid,
+  .settings-profile-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile: Position Edit Profile and Change Password actions at the bottom of their containers */
+  .account-view-mode,
+  .security-overview-mode {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .account-view-mode .settings-card-header,
+  .security-overview-mode .settings-card-header {
+    display: contents !important;
+  }
+
+  .account-view-mode .settings-card-header-left,
+  .security-overview-mode .settings-card-header-left {
+    order: 1;
+    width: 100%;
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .account-view-mode .settings-profile-badge {
+    order: 2;
+  }
+
+  .account-view-mode .settings-profile-details-grid {
+    order: 3;
+  }
+
+  .security-overview-mode .settings-security-grid {
+    order: 2;
+  }
+
+  .account-view-mode .settings-card-header-action,
+  .security-overview-mode .settings-card-header-action {
+    order: 10;
+    width: 100%;
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .account-view-mode .settings-card-header-action .btn,
+  .security-overview-mode .settings-card-header-action .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .settings-page .navbar-center {
+    display: none !important;
+  }
+
+  .settings-page .app-container {
+    margin-top: 0 !important;
+    height: auto !important;
+    min-height: calc(100vh - 64px) !important;
+    min-height: calc(100dvh - 64px) !important;
+  }
+
+  .settings-card {
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+  }
+
+  .settings-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .settings-card-header-action {
+    width: 100%;
+  }
+
+  .settings-card-header-action .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .settings-form-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .settings-profile-badge {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .settings-user-name-row {
+    justify-content: center;
+  }
+
+  .settings-avatar-actions {
+    justify-content: center;
+  }
+
+  .settings-form-actions {
+    flex-direction: column;
+  }
+
+  .settings-form-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .settings-tab-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .settings-about-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}
